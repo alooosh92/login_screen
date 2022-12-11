@@ -13,60 +13,65 @@ class PrimaryWidget extends StatelessWidget {
     required this.text,
     required this.sizeIcon,
   });
-
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Image.asset(
-          'images/primarybg.png',
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          fit: BoxFit.cover,
-        ),
-        Positioned(
-          top: 5,
-          left: 0,
-          right: 0,
-          child: CircleAvatar(
-            maxRadius: sizeIcon,
-            backgroundColor: Color.fromARGB(0, 0, 0, 0),
-            child: Image.asset('images/icon.png'),
-          ),
-        ),
-        Positioned(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          top: MediaQuery.of(context).size.height / size,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return SafeArea(
+      child: Center(
+        child: SingleChildScrollView(
+          child: Stack(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(right: 15),
-                child: Text(
-                  text,
-                  style: TextStyle(fontSize: 40),
+              Image.asset(
+                'images/primarybg.png',
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                fit: BoxFit.cover,
+              ),
+              Positioned(
+                top: 5,
+                left: 0,
+                right: 0,
+                child: CircleAvatar(
+                  maxRadius: sizeIcon,
+                  backgroundColor: Color.fromARGB(0, 0, 0, 0),
+                  child: Image.asset('images/icon.png'),
                 ),
               ),
-              Stack(
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.height,
-                    height: MediaQuery.of(context).size.height,
-                    decoration: BoxDecoration(
-                      color: centerLAyar,
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(40),
+              Positioned(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                top: MediaQuery.of(context).size.height / size,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 15),
+                      child: Text(
+                        text,
+                        style: TextStyle(fontSize: 40),
                       ),
                     ),
-                  ),
-                  widget,
-                ],
+                    Stack(
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.height,
+                          height: MediaQuery.of(context).size.height,
+                          decoration: BoxDecoration(
+                            color: centerLAyar,
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(40),
+                            ),
+                          ),
+                        ),
+                        widget,
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
         ),
-      ],
+      ),
     );
   }
 }

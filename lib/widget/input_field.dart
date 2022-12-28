@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:login_screen/var.dart';
+import 'package:login_screen/res/color_manager.dart';
+import 'package:login_screen/res/size_manager.dart';
 
 class InputField extends StatelessWidget {
   final String text;
@@ -22,17 +22,17 @@ class InputField extends StatelessWidget {
       children: [
         Text(
           text,
-          style: TextStyle(fontSize: 25),
+          style: const TextStyle(fontSize: SizeManager.fontSize25),
         ),
         TextFormField(
           obscureText: obscureTextVal,
           decoration: InputDecoration(
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: primaryColore),
+            focusedBorder: const UnderlineInputBorder(
+              borderSide: BorderSide(color: ColorManager.primaryColore),
             ),
             hintText: hint,
             suffixIcon: Icon(
-              color: primaryColore,
+              color: ColorManager.primaryColore,
               iconVal,
             ),
           ),

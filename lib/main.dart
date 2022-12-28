@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:login_screen/screen/LoginScreenD1.dart';
-import 'package:login_screen/screen/RegisterScreen.dart';
+import 'package:login_screen/res/color_manager.dart';
+import 'package:login_screen/res/string_manager.dart';
+import 'package:login_screen/screen/login_screen_d1.dart';
+import 'package:login_screen/screen/register_screen.dart';
 import 'package:login_screen/var.dart';
 
 void main() {
@@ -17,22 +17,22 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       //Arabic language code
-      localizationsDelegates: [
-        GlobalCupertinoLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
+      localizationsDelegates:
+          StringManager.localizationsDelegates[StringManager.lan],
+      supportedLocales: const [
+        Locale('en', ''),
+        Locale('ar', ''),
       ],
-      supportedLocales: [Locale("ar", "SY")],
-      locale: Locale("ar", "SY"),
+      locale: StringManager.locale[StringManager.lan],
       routes: {
-        'register': (context) => RegisterScreen(),
-        'login': (context) => LoginScreenD1(),
+        'register': (context) => const RegisterScreen(),
+        'login': (context) => const LoginScreenD1(),
       },
       theme: ThemeData(
         fontFamily: font,
-        primaryColor: primaryColore,
+        primaryColor: ColorManager.primaryColore,
       ),
-      home: LoginScreenD1(),
+      home: const LoginScreenD1(),
     );
   }
 }

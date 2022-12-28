@@ -1,11 +1,10 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:login_screen/var.dart';
-import 'ConactionMethod.dart';
-import 'InputField.dart';
-import 'SignInBtn.dart';
+import 'package:login_screen/res/color_manager.dart';
+import 'package:login_screen/res/size_manager.dart';
+import 'package:login_screen/res/string_manager.dart';
+import 'conaction_method.dart';
+import 'input_field.dart';
+import 'sign_in_btn.dart';
 
 class LoginInfo extends StatefulWidget {
   const LoginInfo({super.key});
@@ -19,33 +18,33 @@ class _LoginInfoState extends State<LoginInfo> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(
-        top: 25,
-        right: 25,
+      margin: const EdgeInsets.only(
+        top: SizeManager.contenerMargin25,
+        right: SizeManager.contenerMargin25,
       ),
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
-      decoration: BoxDecoration(
-        color: topLayer,
+      decoration: const BoxDecoration(
+        color: ColorManager.topLayer,
         borderRadius: BorderRadius.only(
-          topRight: Radius.circular(40),
+          topRight: Radius.circular(SizeManager.radiusCircular40),
         ),
       ),
       child: Container(
-        margin: EdgeInsets.all(35),
+        margin: const EdgeInsets.all(SizeManager.contenerMargin35),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             //Input username and password
             InputField(
-              text: 'اسم المستخدم',
-              hint: 'الرجاء ادخال اسم المستخدم',
+              text: StringManager.username[StringManager.lan],
+              hint: StringManager.insertUsername[StringManager.lan],
               obscureTextVal: false,
               iconVal: Icons.person,
             ),
             InputField(
-              text: 'كلمة السر',
-              hint: 'الرجاء ادخال كلمة السر',
+              text: StringManager.password[StringManager.lan],
+              hint: StringManager.insertPassword[StringManager.lan],
               obscureTextVal: true,
               iconVal: Icons.password,
             ),
@@ -56,17 +55,17 @@ class _LoginInfoState extends State<LoginInfo> {
                 TextButton(
                   onPressed: () {},
                   child: Text(
-                    'نسيت كلمة المرور',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
+                    StringManager.forgetPassword[StringManager.lan],
+                    style: const TextStyle(
+                      color: ColorManager.blackColor,
+                      fontSize: SizeManager.fontSize14,
                     ),
                   ),
                 ),
               ],
             ),
-            SizedBox(
-              height: 25,
+            const SizedBox(
+              height: SizeManager.sizeBoxHighte25,
             ),
             //Remmeber me
             Row(
@@ -81,16 +80,16 @@ class _LoginInfoState extends State<LoginInfo> {
                             ischecked = value!;
                           });
                         }),
-                    Text('تذكر معلوماتي'),
+                    Text(StringManager.remmberMe[StringManager.lan]),
                   ],
                 ),
                 SignInBtn(
-                  text: 'Sign in',
+                  text: StringManager.loginButton[StringManager.lan],
                   function: () async {
                     return showDialog(
                       context: context,
                       builder: (context) {
-                        return Center(
+                        return const Center(
                           child: CircularProgressIndicator(),
                         );
                       },
@@ -99,8 +98,8 @@ class _LoginInfoState extends State<LoginInfo> {
                 ),
               ],
             ),
-            SizedBox(
-              height: 30,
+            const SizedBox(
+              height: SizeManager.sizeBoxHighte25,
             ),
             Center(
               child: TextButton(
@@ -108,48 +107,48 @@ class _LoginInfoState extends State<LoginInfo> {
                   Navigator.of(context).pushReplacementNamed('register');
                 },
                 child: Text(
-                  'إنشاء حساب جديد',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
+                  StringManager.newUser[StringManager.lan],
+                  style: const TextStyle(
+                    color: ColorManager.blackColor,
+                    fontSize: SizeManager.fontSize14,
                   ),
                   textAlign: TextAlign.end,
                 ),
               ),
             ),
             //Line
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 40,
-                right: 40,
+            const Padding(
+              padding: EdgeInsets.only(
+                left: SizeManager.paddingSize40,
+                right: SizeManager.paddingSize40,
               ),
               child: Divider(
-                height: 1,
-                color: dividerColor,
-                thickness: 1,
+                height: SizeManager.divider,
+                color: ColorManager.dividerColor,
+                thickness: SizeManager.divider,
               ),
             ),
             //Conaction method
             Padding(
               padding: const EdgeInsets.only(
-                top: 8,
-                left: 40,
-                right: 40,
+                top: SizeManager.paddingSizeTop,
+                left: SizeManager.paddingSize40,
+                right: SizeManager.paddingSize40,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   ConactionMethod(
                     function: () {},
-                    icon: Icon(Icons.facebook),
+                    icon: const Icon(Icons.facebook),
                   ),
                   ConactionMethod(
                     function: () {},
-                    icon: Icon(Icons.mail),
+                    icon: const Icon(Icons.mail),
                   ),
                   ConactionMethod(
                     function: () {},
-                    icon: Icon(Icons.phone),
+                    icon: const Icon(Icons.phone),
                   ),
                 ],
               ),

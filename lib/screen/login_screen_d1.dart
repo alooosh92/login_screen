@@ -15,11 +15,15 @@ class _LoginScreenD1State extends State<LoginScreenD1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PrimaryWidget(
-        widget: const LoginInfo(),
-        size: SizeManager.sizeScreenLogin,
-        text: StringManager.loginButton[StringManager.lan],
-        sizeIcon: SizeManager.sizeIconLogin,
+      body: Directionality(
+        textDirection:
+            StringManager.lan == 'ar' ? TextDirection.rtl : TextDirection.ltr,
+        child: PrimaryWidget(
+          widget: const LoginInfo(),
+          size: SizeManager.sizeScreenLogin,
+          text: StringManager.loginButton[StringManager.lan],
+          sizeIcon: SizeManager.sizeIconLogin,
+        ),
       ),
     );
   }

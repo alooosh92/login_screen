@@ -47,13 +47,11 @@ class _PrimaryWidgetState extends State<PrimaryWidget> {
                               StringManager.lan = "en",
                               Navigator.of(context)
                                   .pushReplacementNamed('login'),
-                              runApp(const MyApp()),
                             }
                           : {
                               StringManager.lan = "ar",
                               Navigator.of(context)
                                   .pushReplacementNamed('login'),
-                              runApp(const MyApp()),
                             };
                     });
                   },

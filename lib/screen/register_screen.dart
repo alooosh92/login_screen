@@ -10,11 +10,15 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PrimaryWidget(
-        widget: const RegisterInfo(),
-        size: SizeManager.sizeScreenRegister,
-        text: StringManager.newUser[StringManager.lan],
-        sizeIcon: SizeManager.sizeIconRegister,
+      body: Directionality(
+        textDirection:
+            StringManager.lan == 'ar' ? TextDirection.rtl : TextDirection.ltr,
+        child: PrimaryWidget(
+          widget: const RegisterInfo(),
+          size: SizeManager.sizeScreenRegister,
+          text: StringManager.newUser[StringManager.lan],
+          sizeIcon: SizeManager.sizeIconRegister,
+        ),
       ),
     );
   }

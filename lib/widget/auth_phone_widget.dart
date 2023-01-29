@@ -4,21 +4,22 @@ import 'package:login_screen/res/color_manager.dart';
 import 'package:login_screen/res/size_manager.dart';
 import 'package:login_screen/res/string_manager.dart';
 import 'package:login_screen/screen/home.dart';
-import 'all_conaction_method.dart';
+import 'package:login_screen/var.dart';
+import 'package:login_screen/widget/all_conaction_method.dart';
+import 'conaction_method.dart';
 import 'input_field.dart';
 import 'sign_in_btn.dart';
 
-class LoginInfo extends StatefulWidget {
-  const LoginInfo({super.key});
+class AuthPhoneInfo extends StatefulWidget {
+  const AuthPhoneInfo({super.key});
 
   @override
-  State<LoginInfo> createState() => _LoginInfoState();
+  State<AuthPhoneInfo> createState() => _AuthPhoneInfoState();
 }
 
-class _LoginInfoState extends State<LoginInfo> {
+class _AuthPhoneInfoState extends State<AuthPhoneInfo> {
   bool ischecked = false;
-  TextEditingController usernameControlle = TextEditingController();
-  TextEditingController passwoedControlle = TextEditingController();
+  TextEditingController authControlle = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(
@@ -47,54 +48,19 @@ class _LoginInfoState extends State<LoginInfo> {
                 children: [
                   //Input username and password
                   InputField(
-                    controller: usernameControlle,
-                    text: StringManager.username[StringManager.lan],
-                    hint: StringManager.insertUsername[StringManager.lan],
+                    controller: authControlle,
+                    text: StringManager.authCode[StringManager.lan],
+                    hint: StringManager.authCode[StringManager.lan],
                     obscureTextVal: false,
                     iconVal: Icons.person,
                   ),
-                  InputField(
-                    controller: passwoedControlle,
-                    text: StringManager.password[StringManager.lan],
-                    hint: StringManager.insertPassword[StringManager.lan],
-                    obscureTextVal: true,
-                    iconVal: Icons.password,
-                  ),
-                  //Forget password
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          StringManager.forgetPassword[StringManager.lan],
-                          style: const TextStyle(
-                            color: ColorManager.blackColor,
-                            fontSize: SizeManager.fontSize14,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+
                   const SizedBox(
                     height: SizeManager.sizeBoxHighte25,
                   ),
-                  //Remmeber me
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Row(
-                        children: [
-                          Checkbox(
-                              value: ischecked,
-                              onChanged: (value) {
-                                setState(() {
-                                  ischecked = value!;
-                                });
-                              }),
-                          Text(StringManager.remmberMe[StringManager.lan]),
-                        ],
-                      ),
                       SignInBtn(
                         text: StringManager.loginButton[StringManager.lan],
                         function: () async {
@@ -106,13 +72,13 @@ class _LoginInfoState extends State<LoginInfo> {
                               );
                             },
                           );
+                          PhoneAuthCredential credential =
+                              PhoneAuthProvider.credential(
+                                  verificationId: DDverificationId,
+                                  smsCode: authControlle.text.trim());
                           await FirebaseAuth.instance
-                              .signInWithEmailAndPassword(
-                                  email: usernameControlle.text.trim(),
-                                  password: passwoedControlle.text.trim())
-                              .whenComplete(
-                                () => Navigator.of(context).pop(),
-                              );
+                              .signInWithCredential(credential);
+                          Navigator.of(context).pushReplacementNamed('auth');
                         },
                       ),
                     ],

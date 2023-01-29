@@ -4,10 +4,13 @@ import 'package:login_screen/firebase_options.dart';
 import 'package:login_screen/res/color_manager.dart';
 import 'package:login_screen/res/string_manager.dart';
 import 'package:login_screen/screen/auth.dart';
+import 'package:login_screen/screen/auth_phone.dart';
 import 'package:login_screen/screen/home.dart';
 import 'package:login_screen/screen/login_screen_d1.dart';
+import 'package:login_screen/screen/login_with_phone.dart';
 import 'package:login_screen/screen/register_screen.dart';
 import 'package:login_screen/var.dart';
+import 'package:login_screen/widget/login_phone_widget.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,6 +38,8 @@ class MyApp extends StatelessWidget {
         'login': (context) => const LoginScreenD1(),
         'home': (context) => const Home(),
         'auth': (context) => const Auth(),
+        'phonelogin': (context) => const LoginWithPhone(),
+        'authphone': (context) => const AuthPhone(),
       },
       theme: ThemeData(
         fontFamily: font,

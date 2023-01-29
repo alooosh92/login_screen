@@ -32,13 +32,6 @@ class RegisterInfo extends StatelessWidget {
         margin: const EdgeInsets.all(SizeManager.contenerMargin20),
         child: Column(
           children: [
-            // InputField(
-            //   controller: usernameControlle,
-            //   text: StringManager.username[StringManager.lan],
-            //   hint: StringManager.insertUsername[StringManager.lan],
-            //   obscureTextVal: false,
-            //   iconVal: Icons.person,
-            // ),
             InputField(
               controller: emailControlle,
               text: StringManager.email[StringManager.lan],

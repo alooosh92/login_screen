@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:login_screen/main.dart';
 import 'package:login_screen/res/color_manager.dart';
 import 'package:login_screen/res/size_manager.dart';
 import 'package:login_screen/res/string_manager.dart';
-import 'package:login_screen/screen/login_screen_d1.dart';
 
 class PrimaryWidget extends StatefulWidget {
   final Widget widget;

@@ -28,6 +28,14 @@ class StringManager {
     "ar": "تسجيل الدخول",
     "en": "Login",
   };
+  static const Map phonNumber = {
+    "ar": "رقم الجوال",
+    "en": "Phone number",
+  };
+  static const Map authCode = {
+    "ar": "رمز التحقق",
+    "en": "Auth code",
+  };
   static const Map registerButton = {
     "ar": "تسجيل",
     "en": "Register",

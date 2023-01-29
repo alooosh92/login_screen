@@ -8,17 +8,18 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser!;
     return Scaffold(
-      body: Center(
-        child: Column(
-          children: [
-            Text('wellcom'),
-            Text(user.email!),
-            ElevatedButton(
-                onPressed: () {
-                  FirebaseAuth.instance.signOut();
-                },
-                child: Text('signOut'))
-          ],
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            children: [
+              Text('wellcom'),
+              ElevatedButton(
+                  onPressed: () {
+                    FirebaseAuth.instance.signOut();
+                  },
+                  child: Text('signOut'))
+            ],
+          ),
         ),
       ),
     );

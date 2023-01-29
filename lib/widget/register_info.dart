@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:login_screen/res/color_manager.dart';
@@ -8,9 +9,12 @@ import 'package:login_screen/widget/sign_in_btn.dart';
 
 class RegisterInfo extends StatelessWidget {
   const RegisterInfo({super.key});
-
   @override
   Widget build(BuildContext context) {
+    TextEditingController usernameControlle = TextEditingController();
+    TextEditingController passwordControlle = TextEditingController();
+    TextEditingController emailControlle = TextEditingController();
+    TextEditingController password2Controlle = TextEditingController();
     return Container(
       margin: const EdgeInsets.only(
         top: SizeManager.contenerMargin25,
@@ -28,25 +32,29 @@ class RegisterInfo extends StatelessWidget {
         margin: const EdgeInsets.all(SizeManager.contenerMargin20),
         child: Column(
           children: [
+            // InputField(
+            //   controller: usernameControlle,
+            //   text: StringManager.username[StringManager.lan],
+            //   hint: StringManager.insertUsername[StringManager.lan],
+            //   obscureTextVal: false,
+            //   iconVal: Icons.person,
+            // ),
             InputField(
-              text: StringManager.username[StringManager.lan],
-              hint: StringManager.insertUsername[StringManager.lan],
-              obscureTextVal: false,
-              iconVal: Icons.person,
-            ),
-            InputField(
+              controller: emailControlle,
               text: StringManager.email[StringManager.lan],
               hint: StringManager.insertEmail[StringManager.lan],
               obscureTextVal: false,
               iconVal: Icons.email,
             ),
             InputField(
+              controller: passwordControlle,
               text: StringManager.password[StringManager.lan],
               hint: StringManager.insertPassword[StringManager.lan],
               obscureTextVal: true,
               iconVal: Icons.password,
             ),
             InputField(
+              controller: password2Controlle,
               text: StringManager.passwordTow[StringManager.lan],
               hint: StringManager.insertPasswordTow[StringManager.lan],
               obscureTextVal: true,
@@ -58,14 +66,31 @@ class RegisterInfo extends StatelessWidget {
             SignInBtn(
               text: StringManager.registerButton[StringManager.lan],
               function: () async {
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  },
-                );
+                if (passwordControlle.text.trim() ==
+                    password2Controlle.text.trim()) {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
+                  );
+                  try {
+                    await FirebaseAuth.instance
+                        .createUserWithEmailAndPassword(
+                            email: emailControlle.text.trim(),
+                            password: passwordControlle.text.trim())
+                        .then((value) => Navigator.of(context).pop())
+                        .whenComplete(
+                          () => Navigator.of(context)
+                              .pushReplacementNamed('auth'),
+                        );
+                  } catch (_) {
+                    usernameControlle.text = _.toString();
+                    rethrow;
+                  }
+                }
               },
             ),
             const SizedBox(

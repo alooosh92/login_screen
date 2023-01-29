@@ -7,12 +7,14 @@ class InputField extends StatelessWidget {
   final String hint;
   final bool obscureTextVal;
   final IconData iconVal;
+  final TextEditingController controller;
   const InputField({
     Key? key,
     required this.text,
     required this.hint,
     required this.obscureTextVal,
     required this.iconVal,
+    required this.controller,
   }) : super(key: key);
 
   @override
@@ -25,6 +27,7 @@ class InputField extends StatelessWidget {
           style: const TextStyle(fontSize: SizeManager.fontSize25),
         ),
         TextFormField(
+          controller: controller,
           obscureText: obscureTextVal,
           decoration: InputDecoration(
             focusedBorder: const UnderlineInputBorder(
